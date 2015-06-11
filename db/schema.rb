@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530091831) do
+ActiveRecord::Schema.define(version: 20150611115920) do
 
   create_table "service_categories", force: :cascade do |t|
     t.string   "title"
@@ -19,26 +19,26 @@ ActiveRecord::Schema.define(version: 20150530091831) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "service_tags", force: :cascade do |t|
-    t.integer  "tag_id"
-    t.integer  "service_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "services", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "service_category_id"
+    t.integer  "user_id"
+    t.string   "description"
+    t.integer  "price"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
   end
 
-  create_table "services", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "servicecategory_id"
-    t.string   "service_title"
-    t.string   "description"
-    t.integer  "service_tag_id"
-    t.integer  "duration"
-    t.string   "instruction"
-    t.integer  "price"
-    t.datetime "register_date"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+  add_index "services", ["service_category_id"], name: "index_services_on_service_category_id"
+  add_index "services", ["user_id"], name: "index_services_on_user_id"
+
+  create_table "services_tags", id: false, force: :cascade do |t|
+    t.integer "service_id"
+    t.integer "tag_id"
   end
+
+  add_index "services_tags", ["service_id"], name: "index_services_tags_on_service_id"
+  add_index "services_tags", ["tag_id"], name: "index_services_tags_on_tag_id"
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
