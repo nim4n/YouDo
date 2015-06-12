@@ -18,8 +18,8 @@
     <% @services.each do |service| %>
       <tr>
         <td><%= service.name %></td>
-        <td><%= service.service_category %></td>
-        <td><%= service.user %></td>
+        <td><%= service.service_category.title %></td>
+        <td><%= service.user.email %></td>
         <td><%= service.description %></td>
         <td><%= service.price %></td>
         <td><%= link_to 'Show', service %></td>

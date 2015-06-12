@@ -17,11 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :service_category_id %><br>
-    <%= f.text_field :service_category_id %>
+    <%= f.select :service_category_id, options_for_select(ServiceCategory.all.map{|s|[s.title, s.id]}) %>
   </div>
   <div class="field">
     <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
+    <%= f.select :user_id, options_for_select(User.all.map{|s|[s.email, s.id]}) %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
